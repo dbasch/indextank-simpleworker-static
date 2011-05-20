@@ -9,6 +9,7 @@
         <script type="text/javascript" src="https://github.com/flaptor/indextank-jquery/raw/1.x/jquery.indextank.autocomplete.js"></script>
         <script type="text/javascript" src="https://github.com/flaptor/indextank-jquery/raw/1.x/jquery.indextank.ajaxsearch.js"></script>
         <script type="text/javascript" src="https://github.com/flaptor/indextank-jquery/raw/1.x/jquery.indextank.renderer.js"></script>
+        <script type="text/javascript" src="https://github.com/flaptor/indextank-jquery/raw/1.x/jquery.indextank.statsrenderer.js"></script>
         <script type="text/javascript" src="https://github.com/flaptor/indextank-jquery/raw/1.x/jquery.indextank.instantsearch.js"></script>
         <script type="text/javascript" src="https://github.com/flaptor/indextank-jquery/raw/1.x/jquery.indextank.basic.js"></script>
         <script type="text/javascript" src="https://github.com/rmm5t/jquery-timeago/raw/master/jquery.timeago.js"></script>
@@ -27,9 +28,10 @@
                                     
                                                 );
                 };
-                $("#myform").indextank_Ize('your_indextank_public_api', 'your_index_name');
+                $("#myform").indextank_Ize('your_indextank_public_api_url', 'your_index_name');
                 var renderer =  $("#results").indextank_Renderer({format: itemRender});
-                $("#query").indextank_Autocomplete().indextank_AjaxSearch( {listeners: renderer,fields: "*"}).indextank_InstantSearch();
+                var stats = $("#stats").indextank_StatsRenderer();
+                $("#query").indextank_Autocomplete().indextank_AjaxSearch( {listeners: renderer.add(stats) ,fields: "*"}).indextank_InstantSearch();
             });
         </script>
     </head>
@@ -40,6 +42,7 @@
             <input id="query" type="text"/>
         </form>
 
+        <p id="stats"></p>
         <ul id="results"></ul>
 
     </body>
